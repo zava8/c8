@@ -76,17 +76,19 @@ inline bool isAnyIdentifier(TokenKind K) {
 /// Return true if this is a C or C++ string-literal (or
 /// C++11 user-defined-string-literal) token.
 inline bool isStringLiteral(TokenKind K) {
-  return K == tok::string_literal || K == tok::wide_string_literal ||
-         K == tok::utf8_string_literal || K == tok::utf16_string_literal ||
-         K == tok::utf32_string_literal;
+  return K == tok::string_literal 
+     // || K == tok::wide_string_literal || // hscii
+         // K == tok::utf8_string_literal || K == tok::utf16_string_literal || // hscii
+         // K == tok::utf32_string_literal // hscii
+         ;
 }
 
 /// Return true if this is a "literal" kind, like a numeric
 /// constant, string, etc.
 inline bool isLiteral(TokenKind K) {
   return K == tok::numeric_constant || K == tok::char_constant ||
-         K == tok::wide_char_constant || K == tok::utf8_char_constant ||
-         K == tok::utf16_char_constant || K == tok::utf32_char_constant ||
+         // K == tok::wide_char_constant || K == tok::utf8_char_constant || // hscii 
+         // K == tok::utf16_char_constant || K == tok::utf32_char_constant || // hscii 
          isStringLiteral(K) || K == tok::header_name;
 }
 

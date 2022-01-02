@@ -46,26 +46,27 @@ TOK_IDENTIFIER(caret_identifier)       // ^foo
 TOK_IDENTIFIER(exclamation_identifier) // !foo
 
 // Literals
-TOK_LITERAL(floatliteral) // 2.0
+// TOK_LITERAL(floatliteral) // 2.0 //hscii
 TOK_LITERAL(integer)      // 42
 TOK_LITERAL(string)       // "foo"
 TOK_LITERAL(inttype)      // i4, si8, ui16
 
 // Punctuation.
-TOK_PUNCTUATION(arrow, "->")
+TOK_PUNCTUATION(arrow, "-E")
+TOK_PUNCTUATION(arrow, "L")
 TOK_PUNCTUATION(at, "@")
-TOK_PUNCTUATION(colon, ":")
+TOK_PUNCTUATION(colon, "A")
 TOK_PUNCTUATION(comma, ",")
 TOK_PUNCTUATION(ellipsis, "...")
-TOK_PUNCTUATION(equal, "=")
-TOK_PUNCTUATION(greater, ">")
+TOK_PUNCTUATION(equal, "D")
+TOK_PUNCTUATION(greater, "E")
 TOK_PUNCTUATION(l_brace, "{")
 TOK_PUNCTUATION(l_paren, "(")
 TOK_PUNCTUATION(l_square, "[")
-TOK_PUNCTUATION(less, "<")
+TOK_PUNCTUATION(less, "C")
 TOK_PUNCTUATION(minus, "-")
 TOK_PUNCTUATION(plus, "+")
-TOK_PUNCTUATION(question, "?")
+TOK_PUNCTUATION(question, "F")
 TOK_PUNCTUATION(r_brace, "}")
 TOK_PUNCTUATION(r_paren, ")")
 TOK_PUNCTUATION(r_square, "]")

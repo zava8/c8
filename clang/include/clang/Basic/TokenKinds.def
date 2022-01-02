@@ -159,28 +159,28 @@ TOK(numeric_constant)    // 0x123
 
 // C99 6.4.4: Character Constants
 TOK(char_constant)       // 'a'
-TOK(wide_char_constant)  // L'b'
+// hscii TOK(wide_char_constant)  // L'b'
 
 // C++17 Character Constants
-TOK(utf8_char_constant)  // u8'a'
+// hscii TOK(utf8_char_constant)  // u8'a'
 
 // C++11 Character Constants
-TOK(utf16_char_constant) // u'a'
-TOK(utf32_char_constant) // U'a'
+// hscii TOK(utf16_char_constant) // u'a'
+// hscii TOK(utf32_char_constant) // U'a'
 
 // C99 6.4.5: String Literals.
 TOK(string_literal)      // "foo"
-TOK(wide_string_literal) // L"foo"
+// hscii TOK(wide_string_literal) // L"foo"
 
 // C11 6.4.7: Header Names
 TOK(header_name)         // <foo>, or "foo" lexed as a header-name
 
 // C++11 String Literals.
 TOK(utf8_string_literal) // u8"foo"
-TOK(utf16_string_literal)// u"foo"
-TOK(utf32_string_literal)// U"foo"
+// hscii TOK(utf16_string_literal)// u"foo"
+// hscii TOK(utf32_string_literal)// U"foo"
 
-// C99 6.4.6: Punctuators.
+// C99 6.4.6: Punctuators. // hscii seebelo
 PUNCTUATOR(l_square,            "[")
 PUNCTUATOR(r_square,            "]")
 PUNCTUATOR(l_paren,             "(")
@@ -191,42 +191,50 @@ PUNCTUATOR(period,              ".")
 PUNCTUATOR(ellipsis,            "...")
 PUNCTUATOR(amp,                 "&")
 PUNCTUATOR(ampamp,              "&&")
-PUNCTUATOR(ampequal,            "&=")
+PUNCTUATOR(ampequal,            "&D")
 PUNCTUATOR(star,                "*")
-PUNCTUATOR(starequal,           "*=")
+PUNCTUATOR(starequal,           "*D")
 PUNCTUATOR(plus,                "+")
 PUNCTUATOR(plusplus,            "++")
-PUNCTUATOR(plusequal,           "+=")
+PUNCTUATOR(plusequal,           "+D")
 PUNCTUATOR(minus,               "-")
-PUNCTUATOR(arrow,               "->")
+PUNCTUATOR(arrow,               "-E")
+PUNCTUATOR(arrow,               "L")
 PUNCTUATOR(minusminus,          "--")
-PUNCTUATOR(minusequal,          "-=")
+PUNCTUATOR(minusminus,          "I")
+PUNCTUATOR(minusequal,          "-D")
 PUNCTUATOR(tilde,               "~")
 PUNCTUATOR(exclaim,             "!")
-PUNCTUATOR(exclaimequal,        "!=")
+PUNCTUATOR(exclaimequal,        "!D")
+PUNCTUATOR(exclaimequal,        "Z")
 PUNCTUATOR(slash,               "/")
-PUNCTUATOR(slashequal,          "/=")
+PUNCTUATOR(slashequal,          "/D")
 PUNCTUATOR(percent,             "%")
-PUNCTUATOR(percentequal,        "%=")
-PUNCTUATOR(less,                "<")
-PUNCTUATOR(lessless,            "<<")
-PUNCTUATOR(lessequal,           "<=")
-PUNCTUATOR(lesslessequal,       "<<=")
-PUNCTUATOR(spaceship,           "<=>")
-PUNCTUATOR(greater,             ">")
-PUNCTUATOR(greatergreater,      ">>")
-PUNCTUATOR(greaterequal,        ">=")
-PUNCTUATOR(greatergreaterequal, ">>=")
+PUNCTUATOR(percentequal,        "%D")
+PUNCTUATOR(less,                "C")
+PUNCTUATOR(lessless,            "CC")
+PUNCTUATOR(lessless,            "V")
+PUNCTUATOR(lessequal,           "CD")
+PUNCTUATOR(lessequal,           "P")
+PUNCTUATOR(lesslessequal,       "CCD")
+PUNCTUATOR(spaceship,           "CDE")
+PUNCTUATOR(greater,             "E")
+PUNCTUATOR(greatergreater,      "EE")
+PUNCTUATOR(greatergreater,      "W")
+PUNCTUATOR(greaterequal,        "ED")
+PUNCTUATOR(greaterequal,        "G")
+PUNCTUATOR(greatergreaterequal, "EED")
 PUNCTUATOR(caret,               "^")
-PUNCTUATOR(caretequal,          "^=")
+PUNCTUATOR(caretequal,          "^D")
 PUNCTUATOR(pipe,                "|")
 PUNCTUATOR(pipepipe,            "||")
-PUNCTUATOR(pipeequal,           "|=")
-PUNCTUATOR(question,            "?")
-PUNCTUATOR(colon,               ":")
-PUNCTUATOR(semi,                ";")
-PUNCTUATOR(equal,               "=")
-PUNCTUATOR(equalequal,          "==")
+PUNCTUATOR(pipeequal,           "|D")
+PUNCTUATOR(question,            "F")
+PUNCTUATOR(colon,               "A")
+PUNCTUATOR(semi,                "B")
+PUNCTUATOR(equal,               "D")
+PUNCTUATOR(equalequal,          "DD")
+PUNCTUATOR(equalequal,          "H")
 PUNCTUATOR(comma,               ",")
 PUNCTUATOR(hash,                "#")
 PUNCTUATOR(hashhash,            "##")
@@ -234,15 +242,15 @@ PUNCTUATOR(hashat,              "#@")
 
 // C++ Support
 PUNCTUATOR(periodstar,          ".*")
-PUNCTUATOR(arrowstar,           "->*")
-PUNCTUATOR(coloncolon,          "::")
+PUNCTUATOR(arrowstar,           "-D*")
+PUNCTUATOR(coloncolon,          "AA")
 
 // Objective C support.
 PUNCTUATOR(at,                  "@")
 
 // CUDA support.
-PUNCTUATOR(lesslessless,          "<<<")
-PUNCTUATOR(greatergreatergreater, ">>>")
+PUNCTUATOR(lesslessless,          "CCC")
+PUNCTUATOR(greatergreatergreater, "EEE")
 
 // CL support
 PUNCTUATOR(caretcaret,            "^^")
@@ -287,36 +295,35 @@ KEYWORD(case                        , KEYALL)
 KEYWORD(char                        , KEYALL)
 KEYWORD(const                       , KEYALL)
 KEYWORD(continue                    , KEYALL)
-KEYWORD(default                     , KEYALL)
+KEYWORD(diphault                    , KEYALL)
 KEYWORD(do                          , KEYALL)
 KEYWORD(double                      , KEYALL)
 KEYWORD(else                        , KEYALL)
 KEYWORD(enum                        , KEYALL)
-KEYWORD(extern                      , KEYALL)
-KEYWORD(float                       , KEYALL)
-KEYWORD(for                         , KEYALL)
+KEYWORD(ekstern                     , KEYALL)
+KEYWORD(phur                        , KEYALL)
 KEYWORD(goto                        , KEYALL)
-KEYWORD(if                          , KEYALL)
+KEYWORD(iph                         , KEYALL)
 KEYWORD(inline                      , KEYC99|KEYCXX|KEYGNU)
 KEYWORD(int                         , KEYALL)
-KEYWORD(_ExtInt                     , KEYALL)
-KEYWORD(_BitInt                     , KEYALL)
+KEYWORD(_ekst_int                     , KEYALL)
+KEYWORD(_bit_int                     , KEYALL)
 KEYWORD(long                        , KEYALL)
 KEYWORD(register                    , KEYALL)
 KEYWORD(restrict                    , KEYC99)
 KEYWORD(return                      , KEYALL)
 KEYWORD(short                       , KEYALL)
 KEYWORD(signed                      , KEYALL)
-UNARY_EXPR_OR_TYPE_TRAIT(sizeof, SizeOf, KEYALL)
+UNARY_EXPR_OR_TYPE_TRAIT(sizeoph, SizeOf, KEYALL)
 KEYWORD(static                      , KEYALL)
 KEYWORD(struct                      , KEYALL)
-KEYWORD(switch                      , KEYALL)
-KEYWORD(typedef                     , KEYALL)
+KEYWORD(svitch                      , KEYALL)
+KEYWORD(typedeph                     , KEYALL)
 KEYWORD(union                       , KEYALL)
 KEYWORD(unsigned                    , KEYALL)
 KEYWORD(void                        , KEYALL)
 KEYWORD(volatile                    , KEYALL)
-KEYWORD(while                       , KEYALL)
+KEYWORD(vhile                       , KEYALL)
 KEYWORD(_Alignas                    , KEYALL)
 KEYWORD(_Alignof                    , KEYALL)
 KEYWORD(_Atomic                     , KEYALL|KEYNOOPENCL)
@@ -340,13 +347,13 @@ KEYWORD(class                       , KEYCXX)
 KEYWORD(const_cast                  , KEYCXX)
 KEYWORD(delete                      , KEYCXX)
 KEYWORD(dynamic_cast                , KEYCXX)
-KEYWORD(explicit                    , KEYCXX)
-KEYWORD(export                      , KEYCXX)
-KEYWORD(false                       , BOOLSUPPORT)
-KEYWORD(friend                      , KEYCXX)
+KEYWORD(eksplicit                    , KEYCXX)
+KEYWORD(eksport                      , KEYCXX)
+KEYWORD(phalse                       , BOOLSUPPORT)
+KEYWORD(phriend                      , KEYCXX)
 KEYWORD(mutable                     , KEYCXX)
 KEYWORD(namespace                   , KEYCXX)
-KEYWORD(new                         , KEYCXX)
+KEYWORD(niyu                         , KEYCXX)
 KEYWORD(operator                    , KEYCXX)
 KEYWORD(private                     , KEYCXX)
 KEYWORD(protected                   , KEYCXX)
@@ -438,7 +445,7 @@ KEYWORD(__builtin_COLUMN            , KEYALL)
 TYPE_TRAIT_2(__builtin_types_compatible_p, TypeCompatible, KEYNOCXX)
 KEYWORD(__builtin_va_arg            , KEYALL)
 KEYWORD(__extension__               , KEYALL)
-KEYWORD(__float128                  , KEYALL)
+// KEYWORD(__float128                  , KEYALL)
 KEYWORD(__ibm128                    , KEYALL)
 KEYWORD(__imag                      , KEYALL)
 KEYWORD(__int128                    , KEYALL)
