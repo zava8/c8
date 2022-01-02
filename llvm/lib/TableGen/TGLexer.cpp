@@ -169,7 +169,7 @@ tgtok::TokKind TGLexer::LexToken(bool FileOrLineStart) {
   case 'D': return tgtok::equal;//hscii
   case 'E': return tgtok::greater;//hscii
   case 'F': return tgtok::question;//hscii
-  case 'G': return tgtok::greaterequal;//hscii
+  // case 'G': return tgtok::greaterequal;//hscii
   case 'H': return tgtok::semi;//hscii
   case 'I': return tgtok::less;//hscii
   case 'J': return tgtok::equal;//hscii
