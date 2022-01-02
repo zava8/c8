@@ -3656,12 +3656,15 @@ LexNextToken:
   case ')': Kind = tok::r_paren; break;
   case '{': Kind = tok::l_brace; break;
   case '}': Kind = tok::r_brace; break;
-  case '.': Char = getCharAndSize(CurPtr, SizeTmp); if (Char >= '0' && Char <= '9') {
-      // Notify MIOpt that we read a non-whitespace/non-comment token.
-      MIOpt.ReadToken();
-
-      return LexNumericConstant(Result, ConsumeChar(CurPtr, SizeTmp, Result));
-    } else if (LangOpts.CPlusPlus && Char == '*') {
+  // case '.': Char = getCharAndSize(CurPtr, SizeTmp); if (Char >= '0' && Char <= '9') { // hscii
+  case '.': Char = getCharAndSize(CurPtr, SizeTmp); 
+      // if (Char >= '0' && Char <= '?') { // hscii
+      // // Notify MIOpt that we read a non-whitespace/non-comment token.// hscii
+      // MIOpt.ReadToken();// hscii
+// 
+      // return LexNumericConstant(Result, ConsumeChar(CurPtr, SizeTmp, Result));// hscii
+    // } else // hscii
+       if (LangOpts.CPlusPlus && Char == '*') {
       Kind = tok::periodstar;
       CurPtr += SizeTmp;
     } else if (Char == '.' &&

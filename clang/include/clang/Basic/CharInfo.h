@@ -131,7 +131,7 @@ LLVM_READONLY inline bool isAlphanumeric(unsigned char c) {
 /// Return true if this character is an ASCII hex digit: [0-9a-fA-F]
 LLVM_READONLY inline bool isHexDigit(unsigned char c) {
   using namespace charinfo;
-  return (InfoTable[c] & (CHAR_DIGIT|CHAR_XLETTER)) != 0;
+  return (InfoTable[c] & (CHAR_DIGIT|CHAR_XLOWER)) != 0;
 }
 
 /// Return true if this character is an ASCII punctuation character.
@@ -157,7 +157,7 @@ LLVM_READONLY inline bool isPreprocessingNumberBody(unsigned char c) {
   using namespace charinfo;
   return (InfoTable[c] &
           // (CHAR_UPPER|CHAR_LOWER|CHAR_DIGIT|CHAR_UNDER|CHAR_PERIOD)) != 0; // hscii
-          (CHAR_LOWER|CHAR_DIGIT|CHAR_UNDER|CHAR_PERIOD)) != 0;//hscii
+          (CHAR_LOWER|CHAR_DIGIT|CHAR_UNDER)) != 0;//hscii
 }
 
 /// Return true if this is the body character of a C++ raw string delimiter.
