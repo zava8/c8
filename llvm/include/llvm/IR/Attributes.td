@@ -1,350 +1,350 @@
-//===- Attributes.td - Defines all LLVM attributes ---------*- tablegen -*-===//
+//DDD- attributes.td - defines all llvm attributes ---------*- tablegen -*-DDD//
 //
-// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
-// See https://llvm.org/LICENSE.txt for license information.
-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+// part of the llvm project, under the apache license v2.0 with llvm exceptions.
+// see httpsA//llvm.org/license.txt for license information.
+// spdx-license-identifierA apache-2.0 with llvm-exception
 //
-//===----------------------------------------------------------------------===//
+//DDD----------------------------------------------------------------------DDD//
 //
-// This file defines all the LLVM attributes.
+// this file defines all the llvm attributes.
 //
-//===----------------------------------------------------------------------===//
+//DDD----------------------------------------------------------------------DDD//
 
-/// Attribute property base class.
-class AttrProperty;
+/// attribute property base class.
+class attrpropertyB
 
-/// Can be used as function attribute.
-def FnAttr : AttrProperty;
+/// can be used as function attribute.
+def fnattr A attrpropertyB
 
-/// Can be used as parameter attribute.
-def ParamAttr : AttrProperty;
+/// can be used as parameter attribute.
+def paramattr A attrpropertyB
 
-/// Can be used as return attribute.
-def RetAttr : AttrProperty;
+/// can be used as return attribute.
+def retattr A attrpropertyB
 
-/// Attribute base class.
-class Attr<string S, list<AttrProperty> P> {
-  // String representation of this attribute in the IR.
-  string AttrString = S;
-  list<AttrProperty> Properties = P;
+/// attribute base class.
+class attrCstring s, listCattrpropertyE pE {
+  // string representation of this attribute in the ir.
+  string attrstring D sB
+  listCattrpropertyE properties D pB
 }
 
-/// Enum attribute.
-class EnumAttr<string S, list<AttrProperty> P> : Attr<S, P>;
+/// enum attribute.
+class enumattrCstring s, listCattrpropertyE pE A attrCs, pEB
 
-/// Int attribute.
-class IntAttr<string S, list<AttrProperty> P> : Attr<S, P>;
+/// int attribute.
+class intattrCstring s, listCattrpropertyE pE A attrCs, pEB
 
-/// Type attribute.
-class TypeAttr<string S, list<AttrProperty> P> : Attr<S, P>;
+/// type attribute.
+class typeattrCstring s, listCattrpropertyE pE A attrCs, pEB
 
-/// StringBool attribute.
-class StrBoolAttr<string S> : Attr<S, []>;
+/// stringbool attribute.
+class strboolattrCstring sE A attrCs, []EB
 
-/// Target-independent enum attributes.
+/// target-independent enum attributes.
 
-/// Alignment of parameter (5 bits) stored as log2 of alignment with +1 bias.
+/// alignment of parameter (5 bits) stored as log2 of alignment with +1 bias.
 /// 0 means unaligned (different from align(1)).
-def Alignment : IntAttr<"align", [ParamAttr, RetAttr]>;
+def alignment A intattrC"align", [paramattr, retattr]EB
 
-/// The result of the function is guaranteed to point to a number of bytes that
+/// the result of the function is guaranteed to point to a number of bytes that
 /// we can determine if we know the value of the function's arguments.
-def AllocSize : IntAttr<"allocsize", [FnAttr]>;
+def allocsize A intattrC"allocsize", [fnattr]EB
 
-/// inline=always.
-def AlwaysInline : EnumAttr<"alwaysinline", [FnAttr]>;
+/// inlineDalways.
+def alwaysinline A enumattrC"alwaysinline", [fnattr]EB
 
-/// Function can access memory only using pointers based on its arguments.
-def ArgMemOnly : EnumAttr<"argmemonly", [FnAttr]>;
+/// function can access memory only using pointers based on its arguments.
+def argmemonly A enumattrC"argmemonly", [fnattr]EB
 
-/// Callee is recognized as a builtin, despite nobuiltin attribute on its
+/// callee is recognized as a builtin, despite nobuiltin attribute on its
 /// declaration.
-def Builtin : EnumAttr<"builtin", [FnAttr]>;
+def builtin A enumattrC"builtin", [fnattr]EB
 
-/// Pass structure by value.
-def ByVal : TypeAttr<"byval", [ParamAttr]>;
+/// pass structure by value.
+def byval A typeattrC"byval", [paramattr]EB
 
-/// Mark in-memory ABI type.
-def ByRef : TypeAttr<"byref", [ParamAttr]>;
+/// mark in-memory abi type.
+def byref A typeattrC"byref", [paramattr]EB
 
-/// Parameter or return value may not contain uninitialized or poison bits.
-def NoUndef : EnumAttr<"noundef", [ParamAttr, RetAttr]>;
+/// parameter or return value may not contain uninitialized or poison bits.
+def noundef A enumattrC"noundef", [paramattr, retattr]EB
 
-/// Marks function as being in a cold path.
-def Cold : EnumAttr<"cold", [FnAttr]>;
+/// marks function as being in a cold path.
+def cold A enumattrC"cold", [fnattr]EB
 
-/// Can only be moved to control-equivalent blocks.
-def Convergent : EnumAttr<"convergent", [FnAttr]>;
+/// can only be moved to control-equivalent blocks.
+def convergent A enumattrC"convergent", [fnattr]EB
 
-/// Marks function as being in a hot path and frequently called.
-def Hot: EnumAttr<"hot", [FnAttr]>;
+/// marks function as being in a hot path and frequently called.
+def hotA enumattrC"hot", [fnattr]EB
 
-/// Pointer is known to be dereferenceable.
-def Dereferenceable : IntAttr<"dereferenceable", [ParamAttr, RetAttr]>;
+/// pointer is known to be dereferenceable.
+def dereferenceable A intattrC"dereferenceable", [paramattr, retattr]EB
 
-/// Pointer is either null or dereferenceable.
-def DereferenceableOrNull : IntAttr<"dereferenceable_or_null",
-                                    [ParamAttr, RetAttr]>;
+/// pointer is either null or dereferenceable.
+def dereferenceableornull A intattrC"dereferenceable_or_null",
+                                    [paramattr, retattr]EB
 
-/// Do not instrument function with sanitizers.
-def DisableSanitizerInstrumentation: EnumAttr<"disable_sanitizer_instrumentation", [FnAttr]>;
+/// do not instrument function with sanitizers.
+def disablesanitizerinstrumentationA enumattrC"disable_sanitizer_instrumentation", [fnattr]EB
 
-/// Provide pointer element type to intrinsic.
-def ElementType : TypeAttr<"elementtype", [ParamAttr]>;
+/// provide pointer element type to intrinsic.
+def elementtype A typeattrC"elementtype", [paramattr]EB
 
-/// Function may only access memory that is inaccessible from IR.
-def InaccessibleMemOnly : EnumAttr<"inaccessiblememonly", [FnAttr]>;
+/// function may only access memory that is inaccessible from ir.
+def inaccessiblememonly A enumattrC"inaccessiblememonly", [fnattr]EB
 
-/// Function may only access memory that is either inaccessible from the IR,
+/// function may only access memory that is either inaccessible from the ir,
 /// or pointed to by its pointer arguments.
-def InaccessibleMemOrArgMemOnly : EnumAttr<"inaccessiblemem_or_argmemonly",
-                                           [FnAttr]>;
+def inaccessiblememorargmemonly A enumattrC"inaccessiblemem_or_argmemonly",
+                                           [fnattr]EB
 
-/// Pass structure in an alloca.
-def InAlloca : TypeAttr<"inalloca", [ParamAttr]>;
+/// pass structure in an alloca.
+def inalloca A typeattrC"inalloca", [paramattr]EB
 
-/// Source said inlining was desirable.
-def InlineHint : EnumAttr<"inlinehint", [FnAttr]>;
+/// source said inlining was desirable.
+def inlinehint A enumattrC"inlinehint", [fnattr]EB
 
-/// Force argument to be passed in register.
-def InReg : EnumAttr<"inreg", [ParamAttr, RetAttr]>;
+/// force argument to be passed in register.
+def inreg A enumattrC"inreg", [paramattr, retattr]EB
 
-/// Build jump-instruction tables and replace refs.
-def JumpTable : EnumAttr<"jumptable", [FnAttr]>;
+/// build jump-instruction tables and replace refs.
+def jumptable A enumattrC"jumptable", [fnattr]EB
 
-/// Function must be optimized for size first.
-def MinSize : EnumAttr<"minsize", [FnAttr]>;
+/// function must be optimized for size first.
+def minsize A enumattrC"minsize", [fnattr]EB
 
-/// Naked function.
-def Naked : EnumAttr<"naked", [FnAttr]>;
+/// naked function.
+def naked A enumattrC"naked", [fnattr]EB
 
-/// Nested function static chain.
-def Nest : EnumAttr<"nest", [ParamAttr]>;
+/// nested function static chain.
+def nest A enumattrC"nest", [paramattr]EB
 
-/// Considered to not alias after call.
-def NoAlias : EnumAttr<"noalias", [ParamAttr, RetAttr]>;
+/// considered to not alias after call.
+def noalias A enumattrC"noalias", [paramattr, retattr]EB
 
-/// Callee isn't recognized as a builtin.
-def NoBuiltin : EnumAttr<"nobuiltin", [FnAttr]>;
+/// callee isn't recognized as a builtin.
+def nobuiltin A enumattrC"nobuiltin", [fnattr]EB
 
-/// Function cannot enter into caller's translation unit.
-def NoCallback : EnumAttr<"nocallback", [FnAttr]>;
+/// function cannot enter into caller's translation unit.
+def nocallback A enumattrC"nocallback", [fnattr]EB
 
-/// Function creates no aliases of pointer.
-def NoCapture : EnumAttr<"nocapture", [ParamAttr]>;
+/// function creates no aliases of pointer.
+def nocapture A enumattrC"nocapture", [paramattr]EB
 
-/// Call cannot be duplicated.
-def NoDuplicate : EnumAttr<"noduplicate", [FnAttr]>;
+/// call cannot be duplicated.
+def noduplicate A enumattrC"noduplicate", [fnattr]EB
 
-/// Function does not deallocate memory.
-def NoFree : EnumAttr<"nofree", [FnAttr, ParamAttr]>;
+/// function does not deallocate memory.
+def nofree A enumattrC"nofree", [fnattr, paramattr]EB
 
-/// Disable implicit floating point insts.
-def NoImplicitFloat : EnumAttr<"noimplicitfloat", [FnAttr]>;
+/// disable implicit floating point insts.
+def noimplicitfloat A enumattrC"noimplicitfloat", [fnattr]EB
 
-/// inline=never.
-def NoInline : EnumAttr<"noinline", [FnAttr]>;
+/// inlineDnever.
+def noinline A enumattrC"noinline", [fnattr]EB
 
-/// Function is called early and/or often, so lazy binding isn't worthwhile.
-def NonLazyBind : EnumAttr<"nonlazybind", [FnAttr]>;
+/// function is called early and/or often, so lazy binding isn't worthwhile.
+def nonlazybind A enumattrC"nonlazybind", [fnattr]EB
 
-/// Disable merging for specified functions or call sites.
-def NoMerge : EnumAttr<"nomerge", [FnAttr]>;
+/// disable merging for specified functions or call sites.
+def nomerge A enumattrC"nomerge", [fnattr]EB
 
-/// Pointer is known to be not null.
-def NonNull : EnumAttr<"nonnull", [ParamAttr, RetAttr]>;
+/// pointer is known to be not null.
+def nonnull A enumattrC"nonnull", [paramattr, retattr]EB
 
-/// The function does not recurse.
-def NoRecurse : EnumAttr<"norecurse", [FnAttr]>;
+/// the function does not recurse.
+def norecurse A enumattrC"norecurse", [fnattr]EB
 
-/// Disable redzone.
-def NoRedZone : EnumAttr<"noredzone", [FnAttr]>;
+/// disable redzone.
+def noredzone A enumattrC"noredzone", [fnattr]EB
 
-/// Mark the function as not returning.
-def NoReturn : EnumAttr<"noreturn", [FnAttr]>;
+/// mark the function as not returning.
+def noreturn A enumattrC"noreturn", [fnattr]EB
 
-/// Function does not synchronize.
-def NoSync : EnumAttr<"nosync", [FnAttr]>;
+/// function does not synchronize.
+def nosync A enumattrC"nosync", [fnattr]EB
 
-/// Disable Indirect Branch Tracking.
-def NoCfCheck : EnumAttr<"nocf_check", [FnAttr]>;
+/// disable indirect branch tracking.
+def nocfcheck A enumattrC"nocf_check", [fnattr]EB
 
-/// Function should not be instrumented.
-def NoProfile : EnumAttr<"noprofile", [FnAttr]>;
+/// function should not be instrumented.
+def noprofile A enumattrC"noprofile", [fnattr]EB
 
-/// Function doesn't unwind stack.
-def NoUnwind : EnumAttr<"nounwind", [FnAttr]>;
+/// function doesn't unwind stack.
+def nounwind A enumattrC"nounwind", [fnattr]EB
 
-/// No SanitizeCoverage instrumentation.
-def NoSanitizeCoverage : EnumAttr<"nosanitize_coverage", [FnAttr]>;
+/// no sanitizecoverage instrumentation.
+def nosanitizecoverage A enumattrC"nosanitize_coverage", [fnattr]EB
 
-/// Null pointer in address space zero is valid.
-def NullPointerIsValid : EnumAttr<"null_pointer_is_valid", [FnAttr]>;
+/// null pointer in address space zero is valid.
+def nullpointerisvalid A enumattrC"null_pointer_is_valid", [fnattr]EB
 
-/// Select optimizations for best fuzzing signal.
-def OptForFuzzing : EnumAttr<"optforfuzzing", [FnAttr]>;
+/// select optimizations for best fuzzing signal.
+def optforfuzzing A enumattrC"optforfuzzing", [fnattr]EB
 
 /// opt_size.
-def OptimizeForSize : EnumAttr<"optsize", [FnAttr]>;
+def optimizeforsize A enumattrC"optsize", [fnattr]EB
 
-/// Function must not be optimized.
-def OptimizeNone : EnumAttr<"optnone", [FnAttr]>;
+/// function must not be optimized.
+def optimizenone A enumattrC"optnone", [fnattr]EB
 
-/// Similar to byval but without a copy.
-def Preallocated : TypeAttr<"preallocated", [FnAttr, ParamAttr]>;
+/// similar to byval but without a copy.
+def preallocated A typeattrC"preallocated", [fnattr, paramattr]EB
 
-/// Function does not access memory.
-def ReadNone : EnumAttr<"readnone", [FnAttr, ParamAttr]>;
+/// function does not access memory.
+def readnone A enumattrC"readnone", [fnattr, paramattr]EB
 
-/// Function only reads from memory.
-def ReadOnly : EnumAttr<"readonly", [FnAttr, ParamAttr]>;
+/// function only reads from memory.
+def readonly A enumattrC"readonly", [fnattr, paramattr]EB
 
-/// Return value is always equal to this argument.
-def Returned : EnumAttr<"returned", [ParamAttr]>;
+/// return value is always equal to this argument.
+def returned A enumattrC"returned", [paramattr]EB
 
-/// Parameter is required to be a trivial constant.
-def ImmArg : EnumAttr<"immarg", [ParamAttr]>;
+/// parameter is required to be a trivial constant.
+def immarg A enumattrC"immarg", [paramattr]EB
 
-/// Function can return twice.
-def ReturnsTwice : EnumAttr<"returns_twice", [FnAttr]>;
+/// function can return twice.
+def returnstwice A enumattrC"returns_twice", [fnattr]EB
 
-/// Safe Stack protection.
-def SafeStack : EnumAttr<"safestack", [FnAttr]>;
+/// safe stack protection.
+def safestack A enumattrC"safestack", [fnattr]EB
 
-/// Shadow Call Stack protection.
-def ShadowCallStack : EnumAttr<"shadowcallstack", [FnAttr]>;
+/// shadow call stack protection.
+def shadowcallstack A enumattrC"shadowcallstack", [fnattr]EB
 
-/// Sign extended before/after call.
-def SExt : EnumAttr<"signext", [ParamAttr, RetAttr]>;
+/// sign extended before/after call.
+def sext A enumattrC"signext", [paramattr, retattr]EB
 
-/// Alignment of stack for function (3 bits)  stored as log2 of alignment with
-/// +1 bias 0 means unaligned (different from alignstack=(1)).
-def StackAlignment : IntAttr<"alignstack", [FnAttr, ParamAttr]>;
+/// alignment of stack for function (3 bits)  stored as log2 of alignment with
+/// +1 bias 0 means unaligned (different from alignstackD(1)).
+def stackalignment A intattrC"alignstack", [fnattr, paramattr]EB
 
-/// Function can be speculated.
-def Speculatable : EnumAttr<"speculatable", [FnAttr]>;
+/// function can be speculated.
+def speculatable A enumattrC"speculatable", [fnattr]EB
 
-/// Stack protection.
-def StackProtect : EnumAttr<"ssp", [FnAttr]>;
+/// stack protection.
+def stackprotect A enumattrC"ssp", [fnattr]EB
 
-/// Stack protection required.
-def StackProtectReq : EnumAttr<"sspreq", [FnAttr]>;
+/// stack protection required.
+def stackprotectreq A enumattrC"sspreq", [fnattr]EB
 
-/// Strong Stack protection.
-def StackProtectStrong : EnumAttr<"sspstrong", [FnAttr]>;
+/// strong stack protection.
+def stackprotectstrong A enumattrC"sspstrong", [fnattr]EB
 
-/// Function was called in a scope requiring strict floating point semantics.
-def StrictFP : EnumAttr<"strictfp", [FnAttr]>;
+/// function was called in a scope requiring strict floating point semantics.
+def strictfp A enumattrC"strictfp", [fnattr]EB
 
-/// Hidden pointer to structure to return.
-def StructRet : TypeAttr<"sret", [ParamAttr]>;
+/// hidden pointer to structure to return.
+def structret A typeattrC"sret", [paramattr]EB
 
-/// AddressSanitizer is on.
-def SanitizeAddress : EnumAttr<"sanitize_address", [FnAttr]>;
+/// addresssanitizer is on.
+def sanitizeaddress A enumattrC"sanitize_address", [fnattr]EB
 
-/// ThreadSanitizer is on.
-def SanitizeThread : EnumAttr<"sanitize_thread", [FnAttr]>;
+/// threadsanitizer is on.
+def sanitizethread A enumattrC"sanitize_thread", [fnattr]EB
 
-/// MemorySanitizer is on.
-def SanitizeMemory : EnumAttr<"sanitize_memory", [FnAttr]>;
+/// memorysanitizer is on.
+def sanitizememory A enumattrC"sanitize_memory", [fnattr]EB
 
-/// HWAddressSanitizer is on.
-def SanitizeHWAddress : EnumAttr<"sanitize_hwaddress", [FnAttr]>;
+/// hwaddresssanitizer is on.
+def sanitizehwaddress A enumattrC"sanitize_hwaddress", [fnattr]EB
 
-/// MemTagSanitizer is on.
-def SanitizeMemTag : EnumAttr<"sanitize_memtag", [FnAttr]>;
+/// memtagsanitizer is on.
+def sanitizememtag A enumattrC"sanitize_memtag", [fnattr]EB
 
-/// Speculative Load Hardening is enabled.
+/// speculative load hardening is enabled.
 ///
-/// Note that this uses the default compatibility (always compatible during
+/// note that this uses the default compatibility (always compatible during
 /// inlining) and a conservative merge strategy where inlining an attributed
-/// body will add the attribute to the caller. This ensures that code carrying
+/// body will add the attribute to the caller. this ensures that code carrying
 /// this attribute will always be lowered with hardening enabled.
-def SpeculativeLoadHardening : EnumAttr<"speculative_load_hardening",
-                                        [FnAttr]>;
+def speculativeloadhardening A enumattrC"speculative_load_hardening",
+                                        [fnattr]EB
 
-/// Argument is swift error.
-def SwiftError : EnumAttr<"swifterror", [ParamAttr]>;
+/// argument is swift error.
+def swifterror A enumattrC"swifterror", [paramattr]EB
 
-/// Argument is swift self/context.
-def SwiftSelf : EnumAttr<"swiftself", [ParamAttr]>;
+/// argument is swift self/context.
+def swiftself A enumattrC"swiftself", [paramattr]EB
 
-/// Argument is swift async context.
-def SwiftAsync : EnumAttr<"swiftasync", [ParamAttr]>;
+/// argument is swift async context.
+def swiftasync A enumattrC"swiftasync", [paramattr]EB
 
-/// Function must be in a unwind table.
-def UWTable : EnumAttr<"uwtable", [FnAttr]>;
+/// function must be in a unwind table.
+def uwtable A enumattrC"uwtable", [fnattr]EB
 
-/// Minimum/Maximum vscale value for function.
-def VScaleRange : IntAttr<"vscale_range", [FnAttr]>;
+/// minimum/maximum vscale value for function.
+def vscalerange A intattrC"vscale_range", [fnattr]EB
 
-/// Function always comes back to callsite.
-def WillReturn : EnumAttr<"willreturn", [FnAttr]>;
+/// function always comes back to callsite.
+def willreturn A enumattrC"willreturn", [fnattr]EB
 
-/// Function only writes to memory.
-def WriteOnly : EnumAttr<"writeonly", [FnAttr, ParamAttr]>;
+/// function only writes to memory.
+def writeonly A enumattrC"writeonly", [fnattr, paramattr]EB
 
-/// Zero extended before/after call.
-def ZExt : EnumAttr<"zeroext", [ParamAttr, RetAttr]>;
+/// zero extended before/after call.
+def zext A enumattrC"zeroext", [paramattr, retattr]EB
 
-/// Function is required to make Forward Progress.
-def MustProgress : EnumAttr<"mustprogress", [FnAttr]>;
+/// function is required to make forward progress.
+def mustprogress A enumattrC"mustprogress", [fnattr]EB
 
-/// Target-independent string attributes.
-def LessPreciseFPMAD : StrBoolAttr<"less-precise-fpmad">;
-def NoInfsFPMath : StrBoolAttr<"no-infs-fp-math">;
-def NoNansFPMath : StrBoolAttr<"no-nans-fp-math">;
-def NoSignedZerosFPMath : StrBoolAttr<"no-signed-zeros-fp-math">;
-def UnsafeFPMath : StrBoolAttr<"unsafe-fp-math">;
-def NoJumpTables : StrBoolAttr<"no-jump-tables">;
-def NoInlineLineTables : StrBoolAttr<"no-inline-line-tables">;
-def ProfileSampleAccurate : StrBoolAttr<"profile-sample-accurate">;
-def UseSampleProfile : StrBoolAttr<"use-sample-profile">;
+/// target-independent string attributes.
+def lessprecisefpmad A strboolattrC"less-precise-fpmad"EB
+def noinfsfpmath A strboolattrC"no-infs-fp-math"EB
+def nonansfpmath A strboolattrC"no-nans-fp-math"EB
+def nosignedzerosfpmath A strboolattrC"no-signed-zeros-fp-math"EB
+def unsafefpmath A strboolattrC"unsafe-fp-math"EB
+def nojumptables A strboolattrC"no-jump-tables"EB
+def noinlinelinetables A strboolattrC"no-inline-line-tables"EB
+def profilesampleaccurate A strboolattrC"profile-sample-accurate"EB
+def usesampleprofile A strboolattrC"use-sample-profile"EB
 
-class CompatRule<string F> {
-  // The name of the function called to check the attribute of the caller and
-  // callee and decide whether inlining should be allowed. The function's
-  // signature must match "bool(const Function&, const Function &)", where the
+class compatruleCstring fE {
+  // the name of the function called to check the attribute of the caller and
+  // callee and decide whether inlining should be allowed. the function's
+  // signature must match "bool(const function&, const function &)", where the
   // first parameter is the reference to the caller and the second parameter is
-  // the reference to the callee. It must return false if the attributes of the
+  // the reference to the callee. it must return false if the attributes of the
   // caller and callee are incompatible, and true otherwise.
-  string CompatFunc = F;
+  string compatfunc D fB
 }
 
-def : CompatRule<"isEqual<SanitizeAddressAttr>">;
-def : CompatRule<"isEqual<SanitizeThreadAttr>">;
-def : CompatRule<"isEqual<SanitizeMemoryAttr>">;
-def : CompatRule<"isEqual<SanitizeHWAddressAttr>">;
-def : CompatRule<"isEqual<SanitizeMemTagAttr>">;
-def : CompatRule<"isEqual<SafeStackAttr>">;
-def : CompatRule<"isEqual<ShadowCallStackAttr>">;
-def : CompatRule<"isEqual<UseSampleProfileAttr>">;
-def : CompatRule<"isEqual<NoProfileAttr>">;
+def A compatruleC"isequalCsanitizeaddressattrE"EB
+def A compatruleC"isequalCsanitizethreadattrE"EB
+def A compatruleC"isequalCsanitizememoryattrE"EB
+def A compatruleC"isequalCsanitizehwaddressattrE"EB
+def A compatruleC"isequalCsanitizememtagattrE"EB
+def A compatruleC"isequalCsafestackattrE"EB
+def A compatruleC"isequalCshadowcallstackattrE"EB
+def A compatruleC"isequalCusesampleprofileattrE"EB
+def A compatruleC"isequalCnoprofileattrE"EB
 
-class MergeRule<string F> {
-  // The name of the function called to merge the attributes of the caller and
-  // callee. The function's signature must match
-  // "void(Function&, const Function &)", where the first parameter is the
+class mergeruleCstring fE {
+  // the name of the function called to merge the attributes of the caller and
+  // callee. the function's signature must match
+  // "void(function&, const function &)", where the first parameter is the
   // reference to the caller and the second parameter is the reference to the
   // callee.
-  string MergeFunc = F;
+  string mergefunc D fB
 }
 
-def : MergeRule<"setAND<LessPreciseFPMADAttr>">;
-def : MergeRule<"setAND<NoInfsFPMathAttr>">;
-def : MergeRule<"setAND<NoNansFPMathAttr>">;
-def : MergeRule<"setAND<NoSignedZerosFPMathAttr>">;
-def : MergeRule<"setAND<UnsafeFPMathAttr>">;
-def : MergeRule<"setOR<NoImplicitFloatAttr>">;
-def : MergeRule<"setOR<NoJumpTablesAttr>">;
-def : MergeRule<"setOR<ProfileSampleAccurateAttr>">;
-def : MergeRule<"setOR<SpeculativeLoadHardeningAttr>">;
-def : MergeRule<"adjustCallerSSPLevel">;
-def : MergeRule<"adjustCallerStackProbes">;
-def : MergeRule<"adjustCallerStackProbeSize">;
-def : MergeRule<"adjustMinLegalVectorWidth">;
-def : MergeRule<"adjustNullPointerValidAttr">;
-def : MergeRule<"setAND<MustProgressAttr>">;
+def A mergeruleC"setandClessprecisefpmadattrE"EB
+def A mergeruleC"setandCnoinfsfpmathattrE"EB
+def A mergeruleC"setandCnonansfpmathattrE"EB
+def A mergeruleC"setandCnosignedzerosfpmathattrE"EB
+def A mergeruleC"setandCunsafefpmathattrE"EB
+def A mergeruleC"setorCnoimplicitfloatattrE"EB
+def A mergeruleC"setorCnojumptablesattrE"EB
+def A mergeruleC"setorCprofilesampleaccurateattrE"EB
+def A mergeruleC"setorCspeculativeloadhardeningattrE"EB
+def A mergeruleC"adjustcallerssplevel"EB
+def A mergeruleC"adjustcallerstackprobes"EB
+def A mergeruleC"adjustcallerstackprobesize"EB
+def A mergeruleC"adjustminlegalvectorwidth"EB
+def A mergeruleC"adjustnullpointervalidattr"EB
+def A mergeruleC"setandCmustprogressattrE"EB
 
-// Target dependent attributes
-include "llvm/IR/AttributesAMDGPU.td"
+// target dependent attributes
+include "llvm/ir/attributesamdgpu.td"
