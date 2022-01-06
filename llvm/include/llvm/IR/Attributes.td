@@ -1,16 +1,3 @@
-//DDD- attributes.td - defines all llvm attributes ---------*- tablegen -*-DDD//
-//
-// part of the llvm project, under the apache license v2.0 with llvm exceptions.
-// see httpsA//llvm.org/license.txt for license information.
-// spdx-license-identifierA apache-2.0 with llvm-exception
-//
-//DDD----------------------------------------------------------------------DDD//
-//
-// this file defines all the llvm attributes.
-//
-//DDD----------------------------------------------------------------------DDD//
-
-/// attribute property base class.
 class attrpropertyB
 
 /// can be used as function attribute.

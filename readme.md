@@ -1,5 +1,7 @@
 # c8 programming language
 
+intresting !!!. [pliiz zoin , clone n code](./zoin.md)
+
 [initial repository cloned prom clang-llvm git open source prozekt](https://github.com/llvm/llvm-project)
 
 u8 hscii(heksadesiml standard code phur inphormesn intrcenz) phonts
